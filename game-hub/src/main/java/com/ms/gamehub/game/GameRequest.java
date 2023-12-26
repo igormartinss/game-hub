@@ -1,37 +1,15 @@
 package com.ms.gamehub.game;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
-public class GameRequest {
-
-    @NotBlank
-    private final String name;
-
-    @NotBlank
-    private final String description;
-
-    @NotNull
-    private final LocalDate releaseDate;
-
-    private final Long timeToBeat;
-
-    @NotBlank
-    private final String company;
-
-    @NotNull
-    @Min(1)
-    @Max(10)
-    private final Integer rating;
-
-    @NotBlank
-    private final String platform;
-
-    @NotBlank
-    private final String categories;
+public record GameRequest(@NotBlank String name, @NotBlank String description, @NotNull LocalDate releaseDate,
+                          Long timeToBeat, @NotBlank String company, @Min(1) @Max(10) @NotNull Integer rating,
+                          @NotBlank String platform, @NotBlank String categories) {
 
     public GameRequest(String name, String description, LocalDate releaseDate, Long timeToBeat, String company, Integer rating, String platform, String categories) {
         this.name = name;
@@ -44,35 +22,38 @@ public class GameRequest {
         this.categories = categories;
     }
 
-    public String getName() {
+    @Override
+    public String name() {
         return name;
     }
 
-    public String getDescription() {
+    @Override
+    public String description() {
         return description;
     }
 
-    public LocalDate getReleaseDate() {
+    @Override
+    public LocalDate releaseDate() {
         return releaseDate;
     }
 
-    public Long getTimeToBeat() {
-        return timeToBeat;
-    }
-
-    public String getCompany() {
+    @Override
+    public String company() {
         return company;
     }
 
-    public Integer getRating() {
+    @Override
+    public Integer rating() {
         return rating;
     }
 
-    public String getPlatform() {
+    @Override
+    public String platform() {
         return platform;
     }
 
-    public String getCategories() {
+    @Override
+    public String categories() {
         return categories;
     }
 }
